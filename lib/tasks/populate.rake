@@ -5,7 +5,7 @@ namespace :db do
 		puts "STARTING ... "
 		Mentor.delete_all
 
-		Mentor.populate 9000 do |mentor|
+		Mentor.populate 1000 do |mentor|
 			mentor.name = Faker::Name.name
 			mentor.profession = Faker::Company.profession
 			mentor.companyname = Faker::Company.name
