@@ -6,11 +6,16 @@ class MentorsController < ApplicationController
   def index
     if params[:tag]
       @mentors = Mentor.tagged_with(params[:tag])
+    elsif params[:tag_query_match_identical]
+      # Find users that matches all given tags:
+      @mentors = Mentor.tagged_with(params[:tag_query_match_identical], :match_all => true)
+    elsif params[:tag_query_match_any]
+      # Find users that matches all given tags:
+      @mentors = Mentor.tagged_with(params[:tag_query_match_any], :any => true)
     else
       @mentors = Mentor.all
     end
-
-      end
+  end
 
   # GET /mentors/1
   # GET /mentors/1.json

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'pry-rails'
 gem 'acts-as-taggable-on', '~> 3.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
