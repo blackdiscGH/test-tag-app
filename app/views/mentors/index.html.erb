@@ -4,26 +4,31 @@
 <h2 class="well"> Search Mentors</h2>
 
   <%= form_tag("/mentors", method: "get") do %>
-    <%= label_tag(:taq_query_match_identical, "Search for these tags (Comma Separated):") %>
-    <%= text_field_tag(:tag_query_match_identical)%>
-    <%= submit_tag("Search for any Mentors having just these tags",  class: "btn btn-default") %>
-  <% end %>
-<br>
-  <%= form_tag("/mentors", method: "get") do %>
     <%= label_tag(:taq_query_match_any, "Search for these tags (Comma Separated):") %>
     <%= text_field_tag(:tag_query_match_any) %>
     <%= submit_tag("Search for Mentors with any of these tags", class: "btn btn-default") %>
   <% end %>
+  <br>
+  <%= form_tag("/mentors", method: "get") do %>
+    <%= label_tag(:taq_query_match_identical, "Search for these tags (Comma Separated):") %>
+    <%= text_field_tag(:tag_query_match_identical)%>
+    <%= submit_tag("Search for Mentors having identical tags",  class: "btn btn-default") %>
+  <% end %>
+
+
 
 
 <br>
 
 <h2 class="well">List of Mentors</h2>
-
+<div class="alert">
+  <%= @notice %> <span class="badge"><%= @total %></span>
+</div>
 <table class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
+       <th>Tags</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -32,6 +37,7 @@
     <% @mentors.each do |mentor| %>
       <tr>
         <td><%= mentor.name %></td>
+        <td><%= raw mentor.tag_list.map {|t| link_to t, tag_path(t)}.join(', ') %></td>
         <td><%= link_to 'Show', mentor, class: "btn btn-default" %></td>
         <td><%= link_to 'Edit', edit_mentor_path(mentor) , class: "btn btn-default"%></td>
         <td><%= link_to 'Destroy', mentor, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></td>
@@ -39,6 +45,8 @@
     <% end %>
   </tbody>
 </table>
+
+<%= link_to 'All Mentors', mentors_path, class: "btn btn-default" %>
 
 <div id="tag_cloud">
 

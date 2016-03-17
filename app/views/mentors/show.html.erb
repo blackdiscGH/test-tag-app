@@ -8,7 +8,22 @@
 	</p>
 
 	<p>
+	  <strong>Profession:</strong>
+	  <%= @mentor.profession %>
+	</p>
+
+
+	<p>
+	  <strong>Company Name:</strong>
+	  <%= @mentor.companyName %>
+	</p>
+
+
+	<p>
 	  <strong>Tag List:</strong>
 	  <%= raw @mentor.tag_list.map {|t| link_to t, tag_path(t)}.join(', ') %>
 	</p>
+
+	 <%= link_to 'Edit Mentor', edit_mentor_path, class: "btn btn-default" %>
+
 </div>

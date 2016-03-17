@@ -5,16 +5,21 @@ class MentorsController < ApplicationController
   # GET /mentors.json
   def index
     if params[:tag]
-      @mentors = Mentor.tagged_with(params[:tag])
+      @mentors = Mentor.tagged_with(params[:tag], :any => true)
+      @notice = "Matching Tag: " + params[:tag].to_s
     elsif params[:tag_query_match_identical]
       # Find users that matches all given tags:
       @mentors = Mentor.tagged_with(params[:tag_query_match_identical], :match_all => true)
+      @notice = "Matching Tags: " + params[:tag_query_match_identical].to_s
     elsif params[:tag_query_match_any]
       # Find users that matches all given tags:
       @mentors = Mentor.tagged_with(params[:tag_query_match_any], :any => true)
+       @notice = "Matching Tags: " + params[:tag_query_match_any].to_s
     else
       @mentors = Mentor.all
+       @notice = "Showing all mentors"
     end
+    @total = @mentors.length
   end
 
   # GET /mentors/1
@@ -79,6 +84,6 @@ class MentorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mentor_params
-      params.require(:mentor).permit(:name, :tag_list)
+      params.require(:mentor).permit(:name, :tag_list, :companyName, :profession)
     end
 end
