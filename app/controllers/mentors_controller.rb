@@ -14,12 +14,14 @@ class MentorsController < ApplicationController
     elsif params[:tag_query_match_any]
       # Find users that matches all given tags:
       @mentors = Mentor.tagged_with(params[:tag_query_match_any], :any => true)
-       @notice = "Matching Tags: " + params[:tag_query_match_any].to_s
+      @notice = "Matching Tags: " + params[:tag_query_match_any].to_s
     else
       @mentors = Mentor.all
-       @notice = "Showing all mentors"
+      @notice = "Showing all mentors"
     end
-    @total = @mentors.length
+
+     @total = @mentors.length unless @mentors
+     @mentors = [] unless @mentors 
   end
 
   # GET /mentors/1
@@ -84,6 +86,6 @@ class MentorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mentor_params
-      params.require(:mentor).permit(:name, :tag_list, :companyName, :profession)
+      params.require(:mentor).permit(:name, :tag_list, :companyname, :profession)
     end
 end

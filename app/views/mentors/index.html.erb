@@ -12,7 +12,7 @@
   <%= form_tag("/mentors", method: "get") do %>
     <%= label_tag(:taq_query_match_identical, "Search for these tags (Comma Separated):") %>
     <%= text_field_tag(:tag_query_match_identical)%>
-    <%= submit_tag("Search for Mentors having identical tags",  class: "btn btn-default") %>
+    <%= submit_tag("Search for Mentors having identical and same number of tags",  class: "btn btn-default") %>
   <% end %>
 
 
