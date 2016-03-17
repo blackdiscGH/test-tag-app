@@ -1,8 +1,26 @@
+<div class="container-fluid">
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Mentors</h1>
+<h2 class="well"> Search Mentors</h2>
 
-<table>
+  <%= form_tag("/mentors", method: "get") do %>
+    <%= label_tag(:taq_query_match_identical, "Search for these tags (Comma Separated):") %>
+    <%= text_field_tag(:tag_query_match_identical)%>
+    <%= submit_tag("Search for any Mentors having just these tags",  class: "btn btn-default") %>
+  <% end %>
+<br>
+  <%= form_tag("/mentors", method: "get") do %>
+    <%= label_tag(:taq_query_match_any, "Search for these tags (Comma Separated):") %>
+    <%= text_field_tag(:tag_query_match_any) %>
+    <%= submit_tag("Search for Mentors with any of these tags", class: "btn btn-default") %>
+  <% end %>
+
+
+<br>
+
+<h2 class="well">List of Mentors</h2>
+
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
@@ -14,37 +32,22 @@
     <% @mentors.each do |mentor| %>
       <tr>
         <td><%= mentor.name %></td>
-        <td><%= link_to 'Show', mentor %></td>
-        <td><%= link_to 'Edit', edit_mentor_path(mentor) %></td>
-        <td><%= link_to 'Destroy', mentor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', mentor, class: "btn btn-default" %></td>
+        <td><%= link_to 'Edit', edit_mentor_path(mentor) , class: "btn btn-default"%></td>
+        <td><%= link_to 'Destroy', mentor, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <div id="tag_cloud">
-  <br/><br/>
-  <h2> Tag Cloud </h2>
+
+  <h2 class="well"> Tag Cloud </h2>
   <% tag_cloud Mentor.tag_counts, %w[s m l] do |tag, css_class| %>
-    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class + " btn btn-default" %>
   <% end %>
+  <br/><br/><br/><br/>
 </div>
 
-<h2> Search for Mentors</h2>
 
-  <%= form_tag("/mentors", method: "get") do %>
-    <%= label_tag(:taq_query_match_identical, "Search for these tags (Comma Separated):") %>
-    <%= text_field_tag(:tag_query_match_identical)%>
-    <%= submit_tag("Search for any Mentors having just these tags") %>
-  <% end %>
-<br>
-  <%= form_tag("/mentors", method: "get") do %>
-    <%= label_tag(:taq_query_match_any, "Search for these tags (Comma Separated):") %>
-    <%= text_field_tag(:tag_query_match_any) %>
-    <%= submit_tag("Search for Mentors with any of these tags") %>
-  <% end %>
-
-
-<br>
-
-<%= link_to 'New Mentor', new_mentor_path %>
+</div>

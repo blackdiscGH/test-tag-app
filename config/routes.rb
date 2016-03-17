@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   get 'tags/:tag', to: 'mentors#index', as: :tag
+  get '/', to: 'mentors#index'
 
   resources :mentors
   # The priority is based upon order of creation: first created -> highest priority.

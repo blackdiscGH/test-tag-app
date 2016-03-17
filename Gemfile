@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'pry-rails'
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'bootstrap-sass', '~> 3.3.6'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

@@ -1,15 +1,14 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid">
 
-<p>
-  <strong>Name:</strong>
-  <%= @mentor.name %>
-</p>
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Tag List:</strong>
-  <%= raw @mentor.tag_list.map {|t| link_to t, tag_path(t)}.join(', ') %>
-</p>
+	<p>
+	  <strong>Name:</strong>
+	  <%= @mentor.name %>
+	</p>
 
-
-<%= link_to 'Edit', edit_mentor_path(@mentor) %> |
-<%= link_to 'Back', mentors_path %>
+	<p>
+	  <strong>Tag List:</strong>
+	  <%= raw @mentor.tag_list.map {|t| link_to t, tag_path(t)}.join(', ') %>
+	</p>
+</div>
