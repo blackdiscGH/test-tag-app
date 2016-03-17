@@ -5,19 +5,23 @@ class MentorsController < ApplicationController
   # GET /mentors.json
   def index
     if params[:tag]
-      @mentors = Mentor.tagged_with(params[:tag], :any => true)
+      @mentors = Mentor.tagged_with(params[:tag], :any => true).by_mentor_name.page(params[:page])
       @notice = "Matching Tag: " + params[:tag].to_s
     elsif params[:tag_query_match_identical]
       # Find users that matches all given tags:
-      @mentors = Mentor.tagged_with(params[:tag_query_match_identical], :match_all => true)
+      @mentors = Mentor.tagged_with(params[:tag_query_match_identical], :match_all => true).page(params[:page])
       @notice = "Matching Tags: " + params[:tag_query_match_identical].to_s
     elsif params[:tag_query_match_any]
       # Find users that matches all given tags:
-      @mentors = Mentor.tagged_with(params[:tag_query_match_any], :any => true)
+      @mentors = Mentor.tagged_with(params[:tag_query_match_any], :any => true).page(params[:page])
       @notice = "Matching Tags: " + params[:tag_query_match_any].to_s
     else
-      @mentors = Mentor.all
       @notice = "Showing all mentors"
+      if params[:page]
+        @mentors = Mentor.by_mentor_name.page(params[:page])
+      else
+        @mentors = Mentor.by_mentor_name.page(1)
+      end
     end
 
      @total = @mentors.length unless @mentors
